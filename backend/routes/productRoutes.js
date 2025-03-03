@@ -11,14 +11,14 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.route('/').get(getProducts).post(protect, admin, createProduct);
+// public rotes==============
+router.get('/', getProducts);
+router.get('/:id', getProductById);
+router.get('/categories', getProductCategories);
 
-router.route('/categories').get(getProductCategories);
-
-router
-    .route('/:id')
-    .get(getProductById)
-    .put(protect, admin, updateProduct)
-    .delete(protect, admin, deleteProduct);
+// protected routes==============
+router.post('/', protect, admin, createProduct);
+router.put('/:id', protect, admin, updateProduct);
+router.delete('/:id', protect, admin, deleteProduct);
 
 export default router;
