@@ -16,12 +16,14 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// Configure CORS
-const allowedOrigins = ['https://product-inventory-smoky.vercel.app']; // Add your frontend URL here
+// const allowedOrigins = [
+//     'https://product-inventory-smoky.vercel.app',
+//     'http://localhost:5173/'
+// ];
 
 app.use(
     cors({
-        origin: allowedOrigins, // Specify allowed origins
+        origin: '*', // Specify allowed origins
         credentials: true, // Allow cookies & authorization headers
         methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
         allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers

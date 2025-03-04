@@ -72,7 +72,7 @@ const createProduct = async (req, res) => {
 
 const searchProducts = async (req, res) => {
     try {
-        const keyword = req.query?.keyword?.trim();
+        const keyword = req.query?.keyword.trim();
 
         if (!keyword) {
             return res
@@ -132,7 +132,7 @@ const deleteProduct = async (req, res) => {
     const product = await Product.findById(req.params?.id);
 
     if (product) {
-        await Product.deleteOne({ _id: product._id });
+        await Product.deleteOne({ _id: product?._id });
         res.json({ message: 'Product removed' });
     } else {
         res.status(404).json({ message: 'Product not found' });

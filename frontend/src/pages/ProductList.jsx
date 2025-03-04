@@ -39,7 +39,7 @@ const ProductList = () => {
                     `${BACKEND_URL}/api/products`,
                     config
                 );
-                setProducts(data.products);
+                setProducts(data?.products);
                 setLoading(false);
             } catch (err) {
                 setError('Failed to fetch products');

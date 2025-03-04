@@ -64,7 +64,7 @@ const Product = () => {
                                 <button
                                     onClick={() =>
                                         navigate(
-                                            `/admin/product/${product._id}/edit`
+                                            `/admin/product/${product?._id}/edit`
                                         )
                                     }
                                     className="flex items-center space-x-1 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
@@ -82,7 +82,7 @@ const Product = () => {
                                         Product Details
                                     </h3>
                                     <p className="text-gray-700 mb-4">
-                                        {product.description}
+                                        {product?.description}
                                     </p>
 
                                     <div className="grid grid-cols-2 gap-4">
@@ -91,7 +91,7 @@ const Product = () => {
                                                 Category
                                             </p>
                                             <p className="font-medium">
-                                                {product.category}
+                                                {product?.category}
                                             </p>
                                         </div>
                                         <div>
@@ -100,7 +100,7 @@ const Product = () => {
                                             </p>
                                             <p className="font-medium">
                                                 {new Date(
-                                                    product.createdAt
+                                                    product?.createdAt
                                                 ).toLocaleDateString()}
                                             </p>
                                         </div>
@@ -115,7 +115,7 @@ const Product = () => {
                                             Price:
                                         </span>
                                         <span className="font-bold text-xl">
-                                            ${product.price.toFixed(2)}
+                                            ${product?.price.toFixed(2)}
                                         </span>
                                     </div>
                                     <div className="flex justify-between">
@@ -124,26 +124,26 @@ const Product = () => {
                                         </span>
                                         <span
                                             className={`font-medium ${
-                                                product.stock > 0
+                                                product?.stock > 0
                                                     ? 'text-green-600'
                                                     : 'text-red-600'
                                             }`}
                                         >
-                                            {product.stock > 0
+                                            {product?.stock > 0
                                                 ? 'In Stock'
                                                 : 'Out of Stock'}
                                         </span>
                                     </div>
                                 </div>
 
-                                {product.stock > 0 && (
+                                {product?.stock > 0 && (
                                     <div className="mb-4">
                                         <div className="flex justify-between">
                                             <span className="text-gray-600">
                                                 Quantity in Stock:
                                             </span>
                                             <span className="font-medium">
-                                                {product.stock}
+                                                {product?.stock}
                                             </span>
                                         </div>
                                     </div>
