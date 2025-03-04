@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 
 // Configure CORS
-const allowedOrigins = ['http://localhost:5173']; // Add your frontend URL here
+const allowedOrigins = ['https://product-inventory-smoky.vercel.app']; // Add your frontend URL here
 
 app.use(
     cors({
