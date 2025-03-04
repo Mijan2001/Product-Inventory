@@ -92,7 +92,7 @@ const updateProfile = asyncHandler(async (req, res) => {
         // }
 
         // user can update the admin status of their own profile
-        if (req.body.isAdmin !== undefined) {
+        if (!user?.isAdmin || req.body.isAdmin !== undefined) {
             user.isAdmin = req.body?.isAdmin;
         }
 
