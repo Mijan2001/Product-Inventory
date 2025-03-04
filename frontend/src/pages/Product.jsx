@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import AuthContext from '../context/AuthContext';
 
-const ProductScreen = () => {
+const Product = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -155,4 +155,4 @@ const ProductScreen = () => {
     );
 };
 
-export default ProductScreen;
+export default Product;

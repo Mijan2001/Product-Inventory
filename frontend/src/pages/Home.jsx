@@ -7,7 +7,7 @@ import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import { Filter } from 'lucide-react';
 
-const HomeScreen = () => {
+const Home = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -18,7 +18,7 @@ const HomeScreen = () => {
     const [sortBy, setSortBy] = useState('createdAt');
     const [sortOrder, setSortOrder] = useState('desc');
     const [showFilters, setShowFilters] = useState(false);
-
+    const [searchQuery, setSearchQuery] = useState('');
     const { keyword, pageNumber } = useParams();
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const HomeScreen = () => {
 
                 const { data } = await axios.get(url);
 
-                setProducts(data.products);
+                setProducts(data?.products);
                 setPage(data.page);
                 setPages(data.pages);
                 setLoading(false);
@@ -70,8 +70,59 @@ const HomeScreen = () => {
         setShowFilters(!showFilters);
     };
 
+    // fetch products by search
+    const fetchProductsBySearch = async () => {
+        if (!searchQuery) return; // Don't fetch if search query is empty
+
+        const searchKeyWords = searchQuery.toLowerCase();
+
+        try {
+            console.log('Searching for:', searchKeyWords);
+            const { data } = await axios.get(
+                `http://localhost:5000/api/products/search?keyword=${searchKeyWords}`
+            );
+            console.log('data======', data);
+            setProducts(data); // Set data directly, since backend returns an array
+        } catch (error) {
+            console.log('mijan');
+            console.error('Error fetching search results:', error);
+            setError('Failed to fetch search results');
+        }
+        setLoading(false);
+    };
+
+    const handleSearchChange = e => {
+        setSearchQuery(e.target.value);
+        console.log('searchQuery == ', searchQuery);
+    };
+
+    useEffect(() => {
+        console.log('search ===', searchQuery);
+        fetchProductsBySearch();
+    }, [searchQuery]);
+
     return (
         <div>
+            {/* Search Bar */}
+            <div className="mb-6 flex justify-center w-full">
+                <div className="flex items-center w-full md:w-3/5 space-x-4">
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                        placeholder="Search products..."
+                        className="p-2 w-full max-w-md border rounded"
+                    />
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    >
+                        Search
+                    </button>
+                </div>
+            </div>
+
+            {/* Header and Filter Button */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">Latest Products</h1>
                 <button
@@ -83,6 +134,7 @@ const HomeScreen = () => {
                 </button>
             </div>
 
+            {/* Filter Section */}
             {showFilters && (
                 <div className="bg-gray-100 p-4 rounded mb-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -137,13 +189,14 @@ const HomeScreen = () => {
                 </div>
             )}
 
+            {/* Display Loading, Error, or Products */}
             {loading ? (
                 <Loader />
             ) : error ? (
                 <Message variant="error">{error}</Message>
             ) : (
                 <>
-                    {products.length === 0 ? (
+                    {products?.length === 0 ? (
                         <Message>No products found</Message>
                     ) : (
                         <>
@@ -168,4 +221,4 @@ const HomeScreen = () => {
     );
 };
 
-export default HomeScreen;
+export default Home;

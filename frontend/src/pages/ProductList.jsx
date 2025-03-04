@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import AuthContext from '../context/AuthContext';
 
-const ProductListScreen = () => {
+const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -64,7 +64,7 @@ const ProductListScreen = () => {
                 config
             );
 
-            setProducts(products.filter(product => product._id !== id));
+            setProducts(products.filter(product => product?._id !== id));
             setSuccessMessage('Product deleted successfully');
             setDeleteLoading(false);
             setShowDeleteModal(false);
@@ -139,34 +139,34 @@ const ProductListScreen = () => {
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {products.map(product => (
-                                    <tr key={product._id}>
+                                    <tr key={product?._id}>
                                         <td className="px-6 py-4 text-sm text-gray-500">
-                                            {product._id}
+                                            {product?._id}
                                         </td>
                                         <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                                            {product.name}
+                                            {product?.name}
                                         </td>
                                         <td className="px-6 py-4 text-sm text-gray-900">
-                                            ${product.price.toFixed(2)}
+                                            ${product?.price.toFixed(2)}
                                         </td>
                                         <td className="px-6 py-4 text-sm text-gray-900">
-                                            {product.category}
+                                            {product?.category}
                                         </td>
                                         <td className="px-6 py-4 text-sm text-gray-900">
-                                            {product.stock}
+                                            {product?.stock}
                                         </td>
                                         <td className="px-6 py-4 text-right text-sm font-medium">
                                             <div className="flex justify-end space-x-2">
                                                 <Link
-                                                    to={`/admin/product/${product._id}/edit`}
+                                                    to={`/admin/product/${product?._id}/edit`}
                                                     className="text-indigo-600 hover:text-indigo-900"
                                                 >
                                                     <Edit size={18} />
                                                 </Link>
                                                 <button
                                                     onClick={() =>
-                                                        openDeleteModal(
-                                                            product._id
+                                                        deleteHandler(
+                                                            product?._id
                                                         )
                                                     }
                                                     className="text-red-600 hover:text-red-900"
@@ -186,4 +186,4 @@ const ProductListScreen = () => {
     );
 };
 
-export default ProductListScreen;
+export default ProductList;

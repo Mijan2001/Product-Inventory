@@ -7,10 +7,12 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import AuthContext from '../context/AuthContext';
 
-const ProductEditScreen = () => {
+const ProductEdit = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
+    console.log('id ==', id);
+    console.log('user frontend =', user);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -237,4 +239,4 @@ const ProductEditScreen = () => {
     );
 };
 
-export default ProductEditScreen;
+export default ProductEdit;

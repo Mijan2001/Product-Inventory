@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import AuthContext from '../context/AuthContext';
 
-const LoginScreen = () => {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -127,4 +127,4 @@ const LoginScreen = () => {
     );
 };
 
-export default LoginScreen;
+export default Login;

@@ -2,13 +2,16 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomeScreen from './pages/HomeScreen';
-import ProductScreen from './pages/ProductScreen';
-import LoginScreen from './pages/LoginScreen';
-import RegisterScreen from './pages/RegisterScreen';
-import ProductListScreen from './pages/ProductListScreen';
-import ProductEditScreen from './pages/ProductEditScreen';
+import Home from './pages/Home';
+import Product from './pages/Product';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ProductList from './pages/ProductList';
+import ProductEdit from './pages/ProductEdit';
 import { AuthProvider } from './context/AuthContext';
+import ProductCreate from './pages/ProductCreate';
+import Profile from './pages/Profile';
+import EditProfile from './pages/EditProfile';
 
 function App() {
     return (
@@ -19,38 +22,41 @@ function App() {
                     <main className="flex-grow py-3">
                         <div className="container mx-auto px-4">
                             <Routes>
-                                <Route path="/" element={<HomeScreen />} />
+                                <Route path="/" element={<Home />} />
                                 <Route
                                     path="/product/:id"
-                                    element={<ProductScreen />}
+                                    element={<Product />}
                                 />
-                                <Route
-                                    path="/login"
-                                    element={<LoginScreen />}
-                                />
+                                <Route path="/login" element={<Login />} />
                                 <Route
                                     path="/register"
-                                    element={<RegisterScreen />}
+                                    element={<Register />}
+                                />
+                                <Route path="/profile" element={<Profile />} />
+                                <Route
+                                    path="/profile/edit"
+                                    element={<EditProfile />}
                                 />
                                 <Route
                                     path="/admin/productlist"
-                                    element={<ProductListScreen />}
+                                    element={<ProductList />}
+                                />
+                                <Route
+                                    path="/admin/product/create"
+                                    element={<ProductCreate />}
                                 />
                                 <Route
                                     path="/admin/product/:id/edit"
-                                    element={<ProductEditScreen />}
+                                    element={<ProductEdit />}
                                 />
-                                <Route
-                                    path="/search/:keyword"
-                                    element={<HomeScreen />}
-                                />
+
                                 <Route
                                     path="/page/:pageNumber"
-                                    element={<HomeScreen />}
+                                    element={<Home />}
                                 />
                                 <Route
                                     path="/search/:keyword/page/:pageNumber"
-                                    element={<HomeScreen />}
+                                    element={<Home />}
                                 />
                             </Routes>
                         </div>

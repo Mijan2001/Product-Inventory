@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import AuthContext from '../context/AuthContext';
 
-const RegisterScreen = () => {
+const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -173,4 +173,4 @@ const RegisterScreen = () => {
     );
 };
 
-export default RegisterScreen;
+export default Register;
