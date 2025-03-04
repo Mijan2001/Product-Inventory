@@ -7,6 +7,9 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import AuthContext from '../context/AuthContext';
 
+const BACKEND_URL =
+    'https://product-inventory-2.onrender.com' || 'http://localhost:5000';
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -32,7 +35,7 @@ const Login = () => {
             setError(null);
 
             const { data } = await axios.post(
-                'http://localhost:5000/api/users/login',
+                `${BACKEND_URL}/api/users/login`,
                 {
                     email,
                     password

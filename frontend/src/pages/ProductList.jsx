@@ -6,6 +6,8 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import AuthContext from '../context/AuthContext';
 
+const BACKEND_URL =
+    'https://product-inventory-2.onrender.com' || 'http://localhost:5000';
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -34,7 +36,7 @@ const ProductList = () => {
                     }
                 };
                 const { data } = await axios.get(
-                    'http://localhost:5000/api/products',
+                    '${BACKEND_URL}/api/products',
                     config
                 );
                 setProducts(data.products);
@@ -59,10 +61,7 @@ const ProductList = () => {
                 }
             };
 
-            await axios.delete(
-                `http://localhost:5000/api/products/${id}`,
-                config
-            );
+            await axios.delete(`${BACKEND_URL}/api/products/${id}`, config);
 
             setProducts(products.filter(product => product?._id !== id));
             setSuccessMessage('Product deleted successfully');

@@ -7,6 +7,8 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import AuthContext from '../context/AuthContext';
 
+const BACKEND_URL =
+    'https://product-inventory-2.onrender.com' || 'http://localhost:5000';
 const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -41,10 +43,11 @@ const Register = () => {
             setError(null);
             setMessage(null);
 
-            const { data } = await axios.post(
-                'http://localhost:5000/api/users',
-                { name, email, password }
-            );
+            const { data } = await axios.post(`${BACKEND_URL}/api/users`, {
+                name,
+                email,
+                password
+            });
 
             login(data);
             setLoading(false);

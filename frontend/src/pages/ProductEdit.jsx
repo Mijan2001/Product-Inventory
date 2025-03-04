@@ -7,6 +7,8 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import AuthContext from '../context/AuthContext';
 
+const BACKEND_URL =
+    'https://product-inventory-2.onrender.com' || 'http://localhost:5000';
 const ProductEdit = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -38,7 +40,7 @@ const ProductEdit = () => {
             try {
                 setLoading(true);
                 const { data } = await axios.get(
-                    `http://localhost:5000/api/products/${id}`
+                    `${BACKEND_URL}/api/products/${id}`
                 );
                 setFormData({
                     name: data.name,
@@ -81,7 +83,7 @@ const ProductEdit = () => {
             };
 
             await axios.put(
-                `http://localhost:5000/api/products/${id}`,
+                `${BACKEND_URL}/api/products/${id}`,
                 formData,
                 config
             );

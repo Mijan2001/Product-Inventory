@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../context/AuthContext'; // Adjust import based on your project structure
 
+const BACKEND_URL =
+    'https://product-inventory-2.onrender.com' || 'http://localhost:5000';
 const ProductCreate = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -52,11 +54,7 @@ const ProductCreate = () => {
                 }
             };
 
-            await axios.post(
-                'http://localhost:5000/api/products',
-                formData,
-                config
-            );
+            await axios.post(`${BACKEND_URL}/api/products`, formData, config);
 
             setSuccess(true);
             setTimeout(() => {

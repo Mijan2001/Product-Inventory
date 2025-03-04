@@ -6,6 +6,8 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import { Filter } from 'lucide-react';
+const BACKEND_URL =
+    'https://product-inventory-2.onrender.com' || 'http://localhost:5000';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -27,7 +29,7 @@ const Home = () => {
                 setLoading(true);
                 const pageNum = pageNumber || '1';
 
-                let url = `http://localhost:5000/api/products?pageNumber=${pageNum}`;
+                let url = `${BACKEND_URL}/api/products?pageNumber=${pageNum}`;
 
                 if (keyword) {
                     url += `&keyword=${keyword}`;
@@ -54,7 +56,7 @@ const Home = () => {
         const fetchCategories = async () => {
             try {
                 const { data } = await axios.get(
-                    'http://localhost:5000/api/products/categories'
+                    `${BACKEND_URL}/api/products/categories`
                 );
                 setCategories(data);
             } catch (err) {
@@ -79,7 +81,7 @@ const Home = () => {
         try {
             console.log('Searching for:', searchKeyWords);
             const { data } = await axios.get(
-                `http://localhost:5000/api/products/search?keyword=${searchKeyWords}`
+                `${BACKEND_URL}/api/products/search?keyword=${searchKeyWords}`
             );
             console.log('data======', data);
             setProducts(data); // Set data directly, since backend returns an array

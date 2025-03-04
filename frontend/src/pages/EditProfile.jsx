@@ -4,6 +4,9 @@ import axios from 'axios';
 import AuthContext from '../context/AuthContext';
 import { User, Mail, Shield, Save, LogOut } from 'lucide-react';
 
+const BACKEND_URL =
+    'https://product-inventory-2.onrender.com' || 'http://localhost:5000';
+
 const EditProfile = () => {
     const { user, logout, login, isAuthenticated } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -30,7 +33,7 @@ const EditProfile = () => {
 
         try {
             const { data } = await axios.post(
-                'http://localhost:5000/api/users/profile/edit',
+                `${BACKEND_URL}/api/users/profile/edit`,
                 { name, email, isAdmin },
                 {
                     headers: {
