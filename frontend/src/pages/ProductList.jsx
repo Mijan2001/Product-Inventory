@@ -22,7 +22,7 @@ const ProductList = () => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        if (!user || !user.isAdmin) {
+        if (!user || !user?.isAdmin) {
             navigate('/login');
             return;
         }
@@ -32,11 +32,11 @@ const ProductList = () => {
                 setLoading(true);
                 const config = {
                     headers: {
-                        Authorization: `Bearer ${user.token}`
+                        Authorization: `Bearer ${user?.token}`
                     }
                 };
                 const { data } = await axios.get(
-                    '${BACKEND_URL}/api/products',
+                    `${BACKEND_URL}/api/products`,
                     config
                 );
                 setProducts(data.products);
