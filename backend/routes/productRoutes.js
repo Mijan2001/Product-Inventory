@@ -3,6 +3,7 @@ import {
     getProducts,
     getProductById,
     createProduct,
+    searchProducts,
     updateProduct,
     deleteProduct,
     getProductCategories
@@ -13,6 +14,7 @@ const router = express.Router();
 
 // public rotes==============
 router.get('/', getProducts);
+router.get('/search', searchProducts);
 router.get('/:id', getProductById);
 router.get('/categories', getProductCategories);
 

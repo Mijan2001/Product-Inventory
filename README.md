@@ -63,6 +63,9 @@ MERN-Inventory-Management/
 ![homepage](./projectimages/homepage.png)
 ![editimage](./projectimages/editimage.png)
 ![admindashboard](./projectimages/admindashboard.png)
+![createProduct](./projectimages/createProduct.png)
+![userpage](./projectimages/userpage.png)
+![useredit](./projectimages/useredit.png)
 
 ## Setup Instructions
 
@@ -107,5 +110,3 @@ MERN-Inventory-Management/
     ```
 
 ---
-
-# Product-Inventory

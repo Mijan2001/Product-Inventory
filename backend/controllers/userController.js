@@ -1,9 +1,7 @@
 import User from '../models/User.js';
 import generateToken from '../utils/generateToken.js';
+import asyncHandler from 'express-async-handler';
 
-// @desc    Auth user & get token
-// @route   POST /api/users/login
-// @access  Public
 const authUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -30,9 +28,6 @@ const authUser = async (req, res) => {
     }
 };
 
-// @desc    Register a new user
-// @route   POST /api/users
-// @access  Public
 const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -46,7 +41,7 @@ const registerUser = async (req, res) => {
         const user = await User.create({
             name,
             email,
-            password // Ensure this is hashed in the User model
+            password
         });
 
         if (user) {
@@ -65,9 +60,6 @@ const registerUser = async (req, res) => {
     }
 };
 
-// @desc    Get user profile
-// @route   GET /api/users/profile
-// @access  Private
 const getUserProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
@@ -87,4 +79,35 @@ const getUserProfile = async (req, res) => {
     }
 };
 
-export { authUser, registerUser, getUserProfile };
+const updateProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+
+        // Only admins can update the admin status
+        // if (req.user.isAdmin && req.body.isAdmin !== undefined) {
+        //     user.isAdmin = req.body.isAdmin;
+        // }
+
+        // user can update the admin status of their own profile
+        if (req.body.isAdmin !== undefined) {
+            user.isAdmin = req.body?.isAdmin;
+        }
+
+        const updatedUser = await user.save();
+
+        res.json({
+            _id: updatedUser?._id,
+            name: updatedUser?.name,
+            email: updatedUser?.email,
+            isAdmin: updatedUser?.isAdmin
+        });
+    } else {
+        res.status(404);
+        throw new Error('User not found');
+    }
+});
+
+export { authUser, registerUser, getUserProfile, updateProfile };
