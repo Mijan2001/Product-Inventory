@@ -45,6 +45,7 @@ const EditProfile = () => {
 
             // Update user context and local storage
             login(data);
+            localStorage.removeItem('userInfo');
             localStorage.setItem('userInfo', JSON.stringify(data));
 
             setLoading(false);
