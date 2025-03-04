@@ -19,11 +19,11 @@ const EditProfile = () => {
     const [error, setError] = useState('');
 
     // Redirect if not authenticated
-    useEffect(() => {
-        if (!isAuthenticated) {
-            navigate('/login');
-        }
-    }, [isAuthenticated, navigate]);
+    // useEffect(() => {
+    //     if (!isAuthenticated) {
+    //         navigate('/login');
+    //     }
+    // }, [isAuthenticated, navigate]);
 
     // Handle Form Submit
     const handleSubmit = async e => {
