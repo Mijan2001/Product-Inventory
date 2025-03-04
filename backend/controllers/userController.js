@@ -16,7 +16,7 @@ const authUser = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 isAdmin: user.isAdmin,
-                token: generateToken(user._id)
+                token: generateToken(user?._id)
             });
         } else {
             return res
@@ -102,7 +102,8 @@ const updateProfile = asyncHandler(async (req, res) => {
             _id: updatedUser?._id,
             name: updatedUser?.name,
             email: updatedUser?.email,
-            isAdmin: updatedUser?.isAdmin
+            isAdmin: updatedUser?.isAdmin,
+            token: generateToken(user?._id)
         });
     } else {
         res.status(404);
